@@ -14,6 +14,10 @@ fn main() {
 	val := optutils.unwrap(some_val)!
 	println(val)
 
+	none_val := ?string(none)
+	val8 := optutils.try_unwrap(none_val) or {"alternative"}
+	println(val8)
+
 	val2 := optutils.unwrap_or(some_val, "")
 	println(val2)
 

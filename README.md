@@ -1,25 +1,56 @@
 # optutils
 
-optutils is a utility module to work with v's option type. 
+`optutils` is a utility module to work with v's option type.
 
 ### Usage
+What it does basically:
+
+```v
+some_val := ?string("something here")
+
+x := if some_val {
+    return x
+} else {
+    return ""
+}
+```
+it help you to test whether there is anything in a `option` variable, if there is something, you get back your value else you can have further operation.
+
+---
 
 Let's start with a basic example, unwrap a value in option.
 
-`unwrap`, unwrap a value from option type, exception will be raised if operation failed.
+`unwrap`, unwrap a value from `option` type, exception will be raised if operation failed.
 ```v
 import optutils
 
 fn main() {
-	some_val := ?string("hi, there!")
+    some_val := ?string("hi, there!")
 
-	val := optutils.unwrap(some_val)!
+    val := optutils.unwrap(some_val)!
 
-	println(val)
+    println(val)
 
     // hi, there!
 }
 ```
+
+`try_unwrap`, try to unwrap a value from `option` type, return none if nothing. This function is very much similar when we use `x := something() or {"this"}`, instead of raised an exception, it let you to continue with `or`
+```v
+import optutils
+
+fn main() {
+	none_val := ?string(none)
+
+	val := optutils.try_unwrap(none_val) or {"alternative"}
+	
+    println(val)
+
+    // "alternative"
+}
+
+```
+
 
 `unwrap_or`, unwrap a value from option type, if value is `none`, it will return the `or` value. `or` value has to be the same type of wrapped value.
 ```v

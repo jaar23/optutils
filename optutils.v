@@ -2,6 +2,14 @@ module optutils
 
 pub type OptionTwo[T, K] = K | T
 
+pub fn try_unwrap[T](optional_val ?T) ?T {
+	if x := optional_val {
+		return x
+	} else {
+		return none
+	}
+}
+
 pub fn unwrap[T](optional_val ?T) !T {
 	if x := optional_val {
 		return x
