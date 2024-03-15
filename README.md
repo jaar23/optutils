@@ -35,14 +35,16 @@ fn main() {
 }
 ```
 
-`try_unwrap`, try to unwrap a value from `option` type, return none if nothing. This function is very much similar when we use `x := something() or {"this"}`, instead of raised an exception, it let you to continue with `or`
+`try_unwrap`, try to unwrap a value from `option` type, return none if nothing, instead of raised an exception, it let you to continue with `or`.
+This function is very much similar when we use `x := something() or {"this"}`, nothing too special.
+
 ```v
 import optutils
 
 fn main() {
-	none_val := ?string(none)
+    none_val := ?string(none)
 
-	val := optutils.try_unwrap(none_val) or {"alternative"}
+    val := optutils.try_unwrap(none_val) or {"alternative"}
 	
     println(val)
 
