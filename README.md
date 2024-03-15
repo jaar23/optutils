@@ -280,6 +280,11 @@ fn main() {
 
 ### Using it
 
+Install via vpm
+```shell
+v install jaar23.optutils
+```
+
 Install via Github
 ```shell
 v install --git https://github.com/jaar23/optutils
