@@ -42,22 +42,39 @@ pub fn unwrap_or_default[T](optional_val ?T) T {
 	}
 }
 
-pub fn filter[T](optional_val ?[]T, func fn (T) bool) ?[]T {
+pub fn try_map[T](optional_val ?[]T, func fn (T) T) ?[]T {
+	if x := optional_val {
+		return x.map(func)
+	} else {
+		return none
+	}
+}
+
+pub fn unwrap_try_map[T](optional_val ?[]T, func fn (T) T) []T {
+	map_vals := try_map(optional_val, func)
+	if x := map_vals {
+		return x
+	} else {
+		return []
+	}
+}
+
+pub fn try_filter[T](optional_val ?[]T, func fn (T) bool) ?[]T {
 	if x := optional_val {
 		mut result := []T{}
 		for i in x {
 			if func(i) {
 				result << i
 			}
-		}		
+		}
 		return result
 	} else {
 		return none
 	}
 }
 
-pub fn unwrap_filter[T](optional_val ?[]T, func fn (T) bool) []T {
-	filtered_val := filter(optional_val, func)
+pub fn unwrap_try_filter[T](optional_val ?[]T, func fn (T) bool) []T {
+	filtered_val := try_filter(optional_val, func)
 	if x := filtered_val {
 		return x
 	} else {
@@ -65,16 +82,15 @@ pub fn unwrap_filter[T](optional_val ?[]T, func fn (T) bool) []T {
 	}
 }
 
-pub fn is_equal[T] (a ?T, b ?T) bool {
+pub fn is_equal[T](a ?T, b ?T) bool {
 	unwrap_a := unwrap_or_default(a)
-	
+
 	unwrap_b := unwrap_or_default(b)
-	println('${unwrap_a}, ${unwrap_b}')
+	// println('${unwrap_a}, ${unwrap_b}')
 	return unwrap_a == unwrap_b
 }
 
-
-pub fn is_some[T] (optional_val ?T) bool {
+pub fn is_some[T](optional_val ?T) bool {
 	if _ := optional_val {
 		return true
 	} else {
@@ -82,7 +98,7 @@ pub fn is_some[T] (optional_val ?T) bool {
 	}
 }
 
-pub fn is_none[T] (optional_val ?T) bool {
+pub fn is_none[T](optional_val ?T) bool {
 	if _ := optional_val {
 		return false
 	} else {
