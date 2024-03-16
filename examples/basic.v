@@ -18,6 +18,10 @@ fn main() {
 	val8 := optutils.try_unwrap(none_val) or {"alternative"}
 	println(val8)
 
+	some_val9 := ?string("something")
+	val10 := some_val9?
+	println(val10)
+
 	val2 := optutils.unwrap_or(some_val, "")
 	println(val2)
 

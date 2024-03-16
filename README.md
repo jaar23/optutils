@@ -20,39 +20,6 @@ it help you to test whether there is anything in a `option` variable, if there i
 
 Let's start with a basic example, unwrap a value in option.
 
-`unwrap`, unwrap a value from `option` type, exception will be raised if operation failed.
-```v
-import optutils
-
-fn main() {
-    some_val := ?string("hi, there!")
-
-    val := optutils.unwrap(some_val)!
-
-    println(val)
-
-    // hi, there!
-}
-```
-
-`try_unwrap`, try to unwrap a value from `option` type, return none if nothing, instead of raised an exception, it let you to continue with `or`.
-This function is very much similar when we use `x := something() or {"this"}`, nothing too special.
-
-```v
-import optutils
-
-fn main() {
-    none_val := ?string(none)
-
-    val := optutils.try_unwrap(none_val) or {"alternative"}
-	
-    println(val)
-
-    // "alternative"
-}
-
-```
-
 
 `unwrap_or`, unwrap a value from option type, if value is `none`, it will return the `or` value. `or` value has to be the same type of wrapped value.
 ```v
@@ -275,6 +242,40 @@ fn main() {
 	println("got nothing? ${nothing}")
 
     // true, it is nothing there
+}
+```
+---
+### Deprecated
+
+*`unwrap` is deprecated, use `?` instead, v has a better offer now.*
+
+```v
+fn main() {
+	some_val := ?string("hi, there!")
+
+	val := some_val?
+	
+	val := optutils.unwrap(some_val)!
+
+	println(val)
+
+	// hi, there!
+}
+```
+
+*`try_unwrap` is deprecated, use `or {}` directly instead, v has a better offer.*
+
+```v
+fn main() {
+	some_val := ?string(none)
+
+	val := some_val or {"alternative"}
+	
+	val := optutils.try_unwrap(none_val) or {"alternative"}
+
+	println(val)
+
+	// alternative
 }
 ```
 
