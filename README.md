@@ -247,7 +247,7 @@ fn main() {
 ---
 ### Deprecated
 
-*`unwrap` is deprecated, use `?` instead, v has a better offer now.*
+`unwrap`, unwrap a value from `option` type, exception will be raised if operation failed, you can also use `or` to return a different value.
 
 ```v
 fn main() {
@@ -257,9 +257,14 @@ fn main() {
 	
 	val := optutils.unwrap(some_val)!
 
-	println(val)
+	val := optutils.unwrap(some_val) or { "the other value" }
 
+	println(val)
 	// hi, there!
+
+	// however, we can do this directly.
+	val := some_val or {"the other value"}
+	
 }
 ```
 
@@ -278,6 +283,7 @@ fn main() {
 	// alternative
 }
 ```
+due to the duplication, I recommend to use `?` and `or` operator instead.
 
 ### Using it
 
